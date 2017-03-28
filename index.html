@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GDS - Práctica Git</title>
+    <link rel="icon" href="https://github.com/favicon.ico"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+
+    <style>
+    .markdown-preview-enhanced pre.editor-colors.editor-colors,
+.markdown-preview-enhanced code {
+  background-color: #f7f7f7 !important;
+}
+pre.editor-colors {
+  background-color: #fff;
+  color: #333;
+}
+pre.editor-colors .line.cursor-line {
+  background-color: #f5f5f5;
+}
+pre.editor-colors .invisible {
+  color: #c0c0c0;
+}
+pre.editor-colors .cursor {
+  border-left: 2px solid #000;
+}
+pre.editor-colors .selection .region {
+  background-color: #c8c8fa;
+}
+pre.editor-colors .bracket-matcher .region {
+  border-bottom: 1px solid #000;
+  box-sizing: border-box;
+}
+pre.editor-colors .invisible-character {
+  color: #c0c0c0;
+}
+pre.editor-colors .indent-guide {
+  color: #c0c0c0;
+}
+pre.editor-colors .wrap-guide {
+  background-color: #c0c0c0;
+}
+pre.editor-colors .gutter {
+  background-color: #fff;
+  color: #333;
+}
+pre.editor-colors .gutter .line-number {
+  color: #333;
+  -webkit-font-smoothing: antialiased;
+}
+pre.editor-colors .gutter .line-number.cursor-line {
+  color: #333;
+  background-color: #f5f5f5;
+}
+pre.editor-colors .gutter .line-number.cursor-line-no-selection {
+  background-color: transparent;
+}
+pre.editor-colors .gutter .line-number .icon-right {
+  color: #333;
+}
+pre.editor-colors .gutter:not(.git-diff-icon) .line-number.git-line-removed.git-line-removed::before {
+  bottom: -3px;
+}
+pre.editor-colors .gutter:not(.git-diff-icon) .line-number.git-line-removed::after {
+  content: "";
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  width: 25px;
+  border-bottom: 1px dotted rgba(255, 236, 236, 0.5);
+  pointer-events: none;
+}
+pre.editor-colors .gutter .line-number.folded,
+pre.editor-colors .gutter .line-number:after,
+pre.editor-colors .fold-marker:after {
+  color: #333;
+}
+pre.editor-colors .search-results .mpe-syntax--marker .region {
+  background-color: transparent;
+  border: 1px solid #ed6a43;
+}
+pre.editor-colors .search-results .mpe-syntax--marker.current-result .region {
+  border: 1px solid #fff;
+}
+.mpe-syntax--comment,
+.mpe-syntax--punctuation.mpe-syntax--definition.mpe-syntax--comment,
+.mpe-syntax--string.mpe-syntax--comment {
+  color: #969896;
+}
+.mpe-syntax--constant,
+.mpe-syntax--entity.mpe-syntax--name.mpe-syntax--constant,
+.mpe-syntax--variable.mpe-syntax--other.mpe-syntax--constant,
+.mpe-syntax--variable.mpe-syntax--language {
+  color: #0086b3;
+}
+.mpe-syntax--entity,
+.mpe-syntax--entity.mpe-syntax--name {
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  color: #795da3;
+}
+.mpe-syntax--variable.mpe-syntax--parameter.mpe-syntax--function {
+  color: #333;
+}
+.mpe-syntax--entity.mpe-syntax--name.mpe-syntax--tag {
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  color: #63a35c;
+}
+.mpe-syntax--keyword {
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  color: #a71d5d;
+}
+.mpe-syntax--storage,
+.mpe-syntax--storage.mpe-syntax--type {
+  color: #a71d5d;
+}
+.mpe-syntax--storage.mpe-syntax--modifier.mpe-syntax--package,
+.mpe-syntax--storage.mpe-syntax--modifier.mpe-syntax--import,
+.mpe-syntax--storage.mpe-syntax--type.mpe-syntax--java {
+  color: #333;
+}
+.mpe-syntax--string,
+.mpe-syntax--punctuation.mpe-syntax--definition.mpe-syntax--string,
+.mpe-syntax--string .mpe-syntax--punctuation.mpe-syntax--section.mpe-syntax--embedded .mpe-syntax--source {
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  color: #183691;
+}
+.mpe-syntax--support {
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  color: #0086b3;
+}
+.mpe-syntax--meta.mpe-syntax--property-name {
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  color: #0086b3;
+}
+.mpe-syntax--variable {
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  color: #ed6a43;
+}
+.mpe-syntax--variable.mpe-syntax--other {
+  color: #333;
+}
+.mpe-syntax--invalid.mpe-syntax--broken {
+  font-weight: bold;
+  font-style: italic;
+  text-decoration: underline;
+  color: #b52a1d;
+}
+.mpe-syntax--invalid.mpe-syntax--deprecated {
+  font-weight: bold;
+  font-style: italic;
+  text-decoration: underline;
+  color: #b52a1d;
+}
+.mpe-syntax--invalid.mpe-syntax--illegal {
+  font-style: italic;
+  text-decoration: underline;
+  background-color: #b52a1d;
+  color: #f8f8f8;
+}
+.mpe-syntax--carriage-return {
+  font-style: italic;
+  text-decoration: underline;
+  background-color: #b52a1d;
+  color: #f8f8f8;
+  undefined: ^M;
+}
+.mpe-syntax--invalid.mpe-syntax--unimplemented {
+  font-weight: bold;
+  font-style: italic;
+  text-decoration: underline;
+  color: #b52a1d;
+}
+.mpe-syntax--message.mpe-syntax--error {
+  color: #b52a1d;
+}
+.mpe-syntax--string .mpe-syntax--source {
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  color: #333;
+}
+.mpe-syntax--string .mpe-syntax--variable {
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  color: #0086b3;
+}
+.mpe-syntax--source.mpe-syntax--regexp,
+.mpe-syntax--string.mpe-syntax--regexp {
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  color: #183691;
+}
+.mpe-syntax--string.mpe-syntax--regexp.mpe-syntax--character-class,
+.mpe-syntax--string.mpe-syntax--regexp .mpe-syntax--constant.mpe-syntax--character.mpe-syntax--escape,
+.mpe-syntax--string.mpe-syntax--regexp .mpe-syntax--source.mpe-syntax--ruby.mpe-syntax--embedded,
+.mpe-syntax--string.mpe-syntax--regexp .mpe-syntax--string.mpe-syntax--regexp.mpe-syntax--arbitrary-repitition {
+  color: #183691;
+}
+.mpe-syntax--string.mpe-syntax--regexp .mpe-syntax--constant.mpe-syntax--character.mpe-syntax--escape {
+  font-weight: bold;
+  color: #63a35c;
+}
+.mpe-syntax--support.mpe-syntax--constant {
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  color: #0086b3;
+}
+.mpe-syntax--support.mpe-syntax--variable {
+  color: #0086b3;
+}
+.mpe-syntax--meta.mpe-syntax--module-reference {
+  color: #0086b3;
+}
+.mpe-syntax--markup.mpe-syntax--list {
+  color: #693a17;
+}
+.mpe-syntax--markup.mpe-syntax--heading,
+.mpe-syntax--markup.mpe-syntax--heading .mpe-syntax--entity.mpe-syntax--name {
+  font-weight: bold;
+  color: #1d3e81;
+}
+.mpe-syntax--markup.mpe-syntax--quote {
+  color: #008080;
+}
+.mpe-syntax--markup.mpe-syntax--italic {
+  font-style: italic;
+  color: #333;
+}
+.mpe-syntax--markup.mpe-syntax--bold {
+  font-weight: bold;
+  color: #333;
+}
+.mpe-syntax--markup.mpe-syntax--raw {
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  color: #0086b3;
+}
+.mpe-syntax--markup.mpe-syntax--deleted,
+.mpe-syntax--meta.mpe-syntax--diff.mpe-syntax--header.mpe-syntax--from-file,
+.mpe-syntax--punctuation.mpe-syntax--definition.mpe-syntax--deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+.mpe-syntax--markup.mpe-syntax--inserted,
+.mpe-syntax--meta.mpe-syntax--diff.mpe-syntax--header.mpe-syntax--to-file,
+.mpe-syntax--punctuation.mpe-syntax--definition.mpe-syntax--inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+.mpe-syntax--markup.mpe-syntax--changed,
+.mpe-syntax--punctuation.mpe-syntax--definition.mpe-syntax--changed {
+  background-color: #ffe3b4;
+  color: #ef9700;
+}
+.mpe-syntax--markup.mpe-syntax--ignored,
+.mpe-syntax--markup.mpe-syntax--untracked {
+  color: #d8d8d8;
+  background-color: #808080;
+}
+.mpe-syntax--meta.mpe-syntax--diff.mpe-syntax--range {
+  color: #795da3;
+  font-weight: bold;
+}
+.mpe-syntax--meta.mpe-syntax--diff.mpe-syntax--header {
+  color: #0086b3;
+}
+.mpe-syntax--meta.mpe-syntax--separator {
+  font-weight: bold;
+  color: #1d3e81;
+}
+.mpe-syntax--meta.mpe-syntax--output {
+  color: #1d3e81;
+}
+.mpe-syntax--brackethighlighter.mpe-syntax--tag,
+.mpe-syntax--brackethighlighter.mpe-syntax--curly,
+.mpe-syntax--brackethighlighter.mpe-syntax--round,
+.mpe-syntax--brackethighlighter.mpe-syntax--square,
+.mpe-syntax--brackethighlighter.mpe-syntax--angle,
+.mpe-syntax--brackethighlighter.mpe-syntax--quote {
+  color: #595e62;
+}
+.mpe-syntax--brackethighlighter.mpe-syntax--unmatched {
+  color: #b52a1d;
+}
+.mpe-syntax--sublimelinter.mpe-syntax--mark.mpe-syntax--error {
+  color: #b52a1d;
+}
+.mpe-syntax--sublimelinter.mpe-syntax--mark.mpe-syntax--warning {
+  color: #ed6a43;
+}
+.mpe-syntax--sublimelinter.mpe-syntax--gutter-mark {
+  color: #c0c0c0;
+}
+.mpe-syntax--constant.mpe-syntax--other.mpe-syntax--reference.mpe-syntax--link,
+.mpe-syntax--string.mpe-syntax--other.mpe-syntax--link {
+  color: #183691;
+  text-decoration: underline;
+}
+.markdown-preview-enhanced {
+  font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  overflow: initial;
+  margin: 10px 13px 10px 13px;
+  padding: 2em;
+  box-sizing: border-box;
+  word-wrap: break-word;
+}
+.markdown-preview-enhanced > :first-child {
+  margin-top: 0;
+}
+.markdown-preview-enhanced[is="space-pen-div"] {
+  width: 100%;
+  margin: 0;
+  z-index: 999;
+  overflow: scroll;
+  font-size: 16px;
+  display: block;
+  position: absolute;
+}
+.markdown-preview-enhanced h1,
+.markdown-preview-enhanced h2,
+.markdown-preview-enhanced h3,
+.markdown-preview-enhanced h4,
+.markdown-preview-enhanced h5,
+.markdown-preview-enhanced h6 {
+  line-height: 1.2;
+  margin-top: 1em;
+  margin-bottom: 16px;
+  color: #000000;
+}
+.markdown-preview-enhanced h1 {
+  font-size: 2.25em;
+  font-weight: 300;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid #d6d6d6;
+}
+.markdown-preview-enhanced h2 {
+  font-size: 1.75em;
+  font-weight: 400;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid #d6d6d6;
+}
+.markdown-preview-enhanced h3 {
+  font-size: 1.5em;
+  font-weight: 500;
+}
+.markdown-preview-enhanced h4 {
+  font-size: 1.25em;
+  font-weight: 600;
+}
+.markdown-preview-enhanced h5 {
+  font-size: 1.1em;
+  font-weight: 600;
+}
+.markdown-preview-enhanced h6 {
+  font-size: 1.0em;
+  font-weight: 600;
+}
+.markdown-preview-enhanced h1,
+.markdown-preview-enhanced h2,
+.markdown-preview-enhanced h3,
+.markdown-preview-enhanced h4,
+.markdown-preview-enhanced h5 {
+  font-weight: 600;
+}
+.markdown-preview-enhanced h5 {
+  font-size: 1em;
+}
+.markdown-preview-enhanced h6 {
+  color: #5c5c5c;
+}
+.markdown-preview-enhanced h1,
+.markdown-preview-enhanced h2 {
+  border-bottom: 1px solid #d6d6d6;
+}
+.markdown-preview-enhanced strong {
+  color: #000000;
+}
+.markdown-preview-enhanced del {
+  color: #5c5c5c;
+}
+.markdown-preview-enhanced a:not([href]) {
+  color: inherit;
+  text-decoration: none;
+}
+.markdown-preview-enhanced a {
+  color: #08c;
+  text-decoration: none;
+}
+.markdown-preview-enhanced a:hover {
+  color: #0050a3;
+  text-decoration: none;
+}
+.markdown-preview-enhanced img,
+.markdown-preview-enhanced svg {
+  max-width: 100%;
+}
+.markdown-preview-enhanced > p {
+  margin-top: 0;
+  margin-bottom: 16px;
+  word-wrap: break-word;
+}
+.markdown-preview-enhanced > ul,
+.markdown-preview-enhanced > ol {
+  margin-bottom: 16px;
+}
+.markdown-preview-enhanced ul,
+.markdown-preview-enhanced ol {
+  padding-left: 2em;
+}
+.markdown-preview-enhanced ul.no-list,
+.markdown-preview-enhanced ol.no-list {
+  padding: 0;
+  list-style-type: none;
+}
+.markdown-preview-enhanced ul ul,
+.markdown-preview-enhanced ul ol,
+.markdown-preview-enhanced ol ol,
+.markdown-preview-enhanced ol ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.markdown-preview-enhanced li {
+  margin-bottom: 0;
+}
+.markdown-preview-enhanced li.task-list-item {
+  list-style: none;
+}
+.markdown-preview-enhanced li > p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.markdown-preview-enhanced .task-list-item-checkbox {
+  margin: 0 0.2em 0.25em -1.6em;
+  vertical-align: middle;
+}
+.markdown-preview-enhanced .task-list-item-checkbox:hover {
+  cursor: pointer;
+}
+.markdown-preview-enhanced blockquote {
+  margin: 16px 0;
+  font-size: inherit;
+  padding: 0 15px;
+  color: #5c5c5c;
+  border-left: 4px solid #d6d6d6;
+}
+.markdown-preview-enhanced blockquote > :first-child {
+  margin-top: 0;
+}
+.markdown-preview-enhanced blockquote > :last-child {
+  margin-bottom: 0;
+}
+.markdown-preview-enhanced hr {
+  height: 4px;
+  margin: 32px 0;
+  background-color: #d6d6d6;
+  border: 0 none;
+}
+.markdown-preview-enhanced table {
+  margin: 10px 0 15px 0;
+  border-collapse: collapse;
+  border-spacing: 0;
+  display: block;
+  width: 100%;
+  overflow: auto;
+  word-break: normal;
+  word-break: keep-all;
+}
+.markdown-preview-enhanced table th {
+  font-weight: bold;
+  color: #000000;
+}
+.markdown-preview-enhanced table td,
+.markdown-preview-enhanced table th {
+  border: 1px solid #d6d6d6;
+  padding: 6px 13px;
+}
+.markdown-preview-enhanced dl {
+  padding: 0;
+}
+.markdown-preview-enhanced dl dt {
+  padding: 0;
+  margin-top: 16px;
+  font-size: 1em;
+  font-style: italic;
+  font-weight: bold;
+}
+.markdown-preview-enhanced dl dd {
+  padding: 0 16px;
+  margin-bottom: 16px;
+}
+.markdown-preview-enhanced code {
+  font-family: Menlo, Monaco, Consolas, 'Courier New', monospace;
+  font-size: 0.85em !important;
+  color: #000000;
+  background-color: #f0f0f0;
+  border-radius: 3px;
+  padding: 0.2em 0;
+}
+.markdown-preview-enhanced code::before,
+.markdown-preview-enhanced code::after {
+  letter-spacing: -0.2em;
+  content: "\00a0";
+}
+.markdown-preview-enhanced pre > code {
+  padding: 0;
+  margin: 0;
+  font-size: 0.85em !important;
+  word-break: normal;
+  white-space: pre;
+  background: transparent;
+  border: 0;
+}
+.markdown-preview-enhanced .highlight {
+  margin-bottom: 16px;
+}
+.markdown-preview-enhanced .highlight pre,
+.markdown-preview-enhanced pre {
+  font-family: Menlo, Monaco, Consolas, 'Courier New', monospace;
+  padding: 16px;
+  overflow: auto;
+  font-size: 0.85em !important;
+  line-height: 1.45;
+  color: #333;
+  background-color: #f0f0f0 !important;
+  border: #d6d6d6;
+  border-radius: 3px;
+}
+.markdown-preview-enhanced .highlight pre {
+  margin-bottom: 0;
+  word-break: normal;
+}
+.markdown-preview-enhanced pre {
+  word-wrap: break-word;
+  white-space: normal;
+  word-break: break-all;
+}
+.markdown-preview-enhanced pre .section {
+  opacity: 1;
+}
+.markdown-preview-enhanced pre code,
+.markdown-preview-enhanced pre tt {
+  display: inline;
+  max-width: initial;
+  padding: 0;
+  margin: 0;
+  overflow: initial;
+  line-height: inherit;
+  word-wrap: normal;
+  background-color: transparent;
+  border: 0;
+}
+.markdown-preview-enhanced pre code:before,
+.markdown-preview-enhanced pre tt:before,
+.markdown-preview-enhanced pre code:after,
+.markdown-preview-enhanced pre tt:after {
+  content: normal;
+}
+.markdown-preview-enhanced p,
+.markdown-preview-enhanced blockquote,
+.markdown-preview-enhanced ul,
+.markdown-preview-enhanced ol,
+.markdown-preview-enhanced dl,
+.markdown-preview-enhanced pre {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+.markdown-preview-enhanced kbd {
+  color: #000000;
+  border: 1px solid #d6d6d6;
+  border-bottom: 2px solid #c7c7c7;
+  padding: 2px 4px;
+  background-color: #f0f0f0;
+  border-radius: 3px;
+}
+.markdown-preview-enhanced .pagebreak,
+.markdown-preview-enhanced .newpage {
+  page-break-before: always;
+}
+@media screen and (min-width: 914px) {
+  .markdown-preview-enhanced {
+    width: 980px;
+    margin: 10px auto;
+    background: #fff;
+  }
+}
+@media screen and (max-width: 400px) {
+  .markdown-preview-enhanced {
+    font-size: 14px;
+    margin: 0 auto;
+    padding: 15px;
+  }
+}
+@media print {
+  .markdown-preview-enhanced {
+    background-color: #fff;
+    /*table,*/
+  }
+  .markdown-preview-enhanced h1,
+  .markdown-preview-enhanced h2,
+  .markdown-preview-enhanced h3,
+  .markdown-preview-enhanced h4,
+  .markdown-preview-enhanced h5,
+  .markdown-preview-enhanced h6 {
+    color: #000000;
+    page-break-after: avoid;
+  }
+  .markdown-preview-enhanced blockquote {
+    color: #5c5c5c;
+  }
+  .markdown-preview-enhanced pre {
+    page-break-inside: avoid;
+  }
+  .markdown-preview-enhanced table {
+    display: table;
+  }
+  .markdown-preview-enhanced img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+  }
+  .markdown-preview-enhanced pre,
+  .markdown-preview-enhanced code {
+    word-wrap: break-word;
+    white-space: normal;
+  }
+}
+.markdown-preview-enhanced[is="space-pen-div"] .code-chunk {
+  position: relative;
+}
+.markdown-preview-enhanced[is="space-pen-div"] .code-chunk .output-div {
+  overflow-x: auto;
+}
+.markdown-preview-enhanced[is="space-pen-div"] .code-chunk .output-div svg {
+  display: block;
+}
+.markdown-preview-enhanced[is="space-pen-div"] .code-chunk pre {
+  cursor: text;
+}
+.markdown-preview-enhanced[is="space-pen-div"] .code-chunk .btn-group {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: none;
+}
+.markdown-preview-enhanced[is="space-pen-div"] .code-chunk .btn-group .run-btn,
+.markdown-preview-enhanced[is="space-pen-div"] .code-chunk .btn-group .run-all-btn {
+  float: right;
+  margin-left: 4px;
+  border-radius: 3px;
+  font-size: 0.8em;
+  color: #eee;
+  background-color: #528bff;
+  background-image: none;
+  border: none;
+}
+.markdown-preview-enhanced[is="space-pen-div"] .code-chunk .btn-group .run-btn:hover,
+.markdown-preview-enhanced[is="space-pen-div"] .code-chunk .btn-group .run-all-btn:hover {
+  background-color: #4b7fe8;
+  cursor: pointer;
+}
+.markdown-preview-enhanced[is="space-pen-div"] .code-chunk:hover .btn-group {
+  display: block;
+}
+.markdown-preview-enhanced[is="space-pen-div"] .code-chunk .status {
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 0.85em;
+  color: inherit;
+  padding: 2px 6px;
+  background-color: rgba(0, 0, 0, 0.04);
+  display: none;
+}
+.markdown-preview-enhanced[is="space-pen-div"] .code-chunk.running .btn-group {
+  display: none;
+}
+.markdown-preview-enhanced[is="space-pen-div"] .code-chunk.running .status {
+  display: block;
+}
+.markdown-preview-enhanced[is="space-pen-div"] .back-to-top-btn,
+.markdown-preview-enhanced[is="space-pen-div"] .refresh-btn {
+  position: fixed;
+  display: none;
+  right: 24px;
+  top: 54px;
+}
+.markdown-preview-enhanced[is="space-pen-div"] .back-to-top-btn {
+  right: 72px;
+}
+.markdown-preview-enhanced[is="space-pen-div"]:hover .back-to-top-btn,
+.markdown-preview-enhanced[is="space-pen-div"]:hover .refresh-btn {
+  display: block;
+  opacity: 0.4;
+}
+.markdown-preview-enhanced[is="space-pen-div"]:hover .back-to-top-btn:hover,
+.markdown-preview-enhanced[is="space-pen-div"]:hover .refresh-btn:hover {
+  opacity: 1.0;
+}
+.markdown-preview-enhanced:not([is="space-pen-div"]) .code-chunk .btn-group {
+  display: none;
+}
+.markdown-preview-enhanced:not([is="space-pen-div"]) .code-chunk .status {
+  display: none;
+}
+.markdown-preview-enhanced:not([is="space-pen-div"]) .back-to-top-btn {
+  display: none;
+}
+/*
+ * Reveal.js styles
+ */
+[data-presentation-preview-mode] {
+  background-color: #f4f4f4;
+}
+[data-presentation-preview-mode] .preview-slides {
+  width: 100%;
+}
+[data-presentation-preview-mode] .preview-slides .slide {
+  position: relative;
+  background-color: #fff !important;
+  padding: 2em !important;
+  margin-bottom: 12px;
+  text-align: left !important;
+  display: flex;
+  align-items: center;
+  border: 1px solid #e6e6e6;
+  box-shadow: 0px 0px 16px 4px #eeeeee;
+  font-size: 24px;
+}
+[data-presentation-preview-mode] .preview-slides .slide h1,
+[data-presentation-preview-mode] .preview-slides .slide h2,
+[data-presentation-preview-mode] .preview-slides .slide h3,
+[data-presentation-preview-mode] .preview-slides .slide h4,
+[data-presentation-preview-mode] .preview-slides .slide h5,
+[data-presentation-preview-mode] .preview-slides .slide h6 {
+  margin-top: 0;
+}
+[data-presentation-preview-mode] .preview-slides .slide .background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+[data-presentation-preview-mode] .preview-slides .slide .background-iframe,
+[data-presentation-preview-mode] .preview-slides .slide .background-iframe-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  border: none;
+  z-index: 1;
+}
+[data-presentation-preview-mode] .preview-slides .slide .background-iframe-overlay {
+  z-index: 2;
+}
+[data-presentation-preview-mode] section {
+  display: block;
+  width: 100%;
+  transform-style: preserve-3d;
+  font-size: 100%;
+  font: inherit;
+  z-index: 100;
+}
+.markdown-preview-enhanced[data-presentation-mode] {
+  font-size: 24px;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.markdown-preview-enhanced[data-presentation-mode] h1,
+.markdown-preview-enhanced[data-presentation-mode] h2,
+.markdown-preview-enhanced[data-presentation-mode] h3,
+.markdown-preview-enhanced[data-presentation-mode] h4,
+.markdown-preview-enhanced[data-presentation-mode] h5,
+.markdown-preview-enhanced[data-presentation-mode] h6 {
+  margin-top: 0;
+}
+.markdown-preview-enhanced[data-presentation-mode] strong {
+  font-weight: bold;
+}
+.markdown-preview-enhanced[data-presentation-mode]::-webkit-scrollbar {
+  display: none;
+}
+.markdown-preview-enhanced .slides {
+  text-align: left !important;
+}
+
+    /*
+ * Your Stylesheet
+ *
+ * This stylesheet is loaded when Atom starts up and is reloaded automatically
+ * when it is changed and saved.
+ *
+ * Add your own CSS or Less to fully customize Atom.
+ * If you are unfamiliar with Less, you can read more about it here:
+ * http://lesscss.org
+ */
+/*
+ * Examples
+ * (To see them, uncomment and save)
+ */
+
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css">
+
+    
+  </head>
+  <body class="markdown-preview-enhanced  " >
+
+  <p><center><br>
+<h1>Práctica de Git</h1><br>
+<h2>Gestión y desarrollo del software</h2><br>
+<br><br>
+<h4>Autores</h4><br>
+<b>David Lozano Jarque (NIU 1359958)</b><br>
+<b>Carlos González Cebrecos (NIU 1212586)</b><br>
+<br><br>
+Escuela de Ingeniería, Universidad Autónoma de Barcelona<br>
+Curso 2016-2017<br>
+</center></p>
+<div style="page-break-after: always;"></div>
+<h2 id="introducci&#xF3;n">Introducción</h2>
+<p>La práctica presente consiste en aprender a usar <em>Git</em>, el software de control de versiones diseñado por <em>Linus Torvalds</em>.</p>
+<p>Para ello, realizaremos un proyecto sencillo de software y gestionaremos el desarrollo de su código fuente usando <em>Git</em>, lo que también nos permitirá gestionar las <em>releases</em> que entregaríamos al cliente o clientes.</p>
+<h3 id="el-proyecto-un-software-de-facturaci&#xF3;n">El proyecto: un software de facturación</h3>
+<p>El proyecto que realizaremos y que gestionaremos con <em>Git</em> es un pequeño software de facturación implementado en <em>Java</em> que permite gestionar (sin persistencia de datos) un conjunto de clientes, productos y facturas.</p>
+<p>Básicamente el software implementa operaciones <em>CRUD</em> (<em>Create, Read, Update, Delete</em>) sobre los elementos anteriormente mencionados a través de una interfície de línea de comandos.</p>
+<p>El proyecto continuará su desarrollo a partir de una versión inicial funcional que contiene los ficheros <code>.java</code> con el código fuente de éste.</p>
+<blockquote>
+<p>No se incluye ningún proyecto de <em>Eclipse</em>, <em>Netbeans</em>... en la versión inicial a desarrollar del proyecto</p>
+</blockquote>
+<h3 id="herramientas">Herramientas</h3>
+<p>Como herramientas durante el desarrollo, a parte de usar y aprender el software de control de versiones <em>Git</em>, también usaremos:</p>
+<ul>
+<li><p><em>Java SE Development Kit 8u121</em> para el desarrollo del código y compilación de éste en lenguaje <em>Java</em></p></li>
+<li><p><em>Eclipse Neon.2</em> como <em>IDE</em> (Entorno de desarrollo integrado)</p></li>
+<li><p>Lenguaje <em>markdown</em> para la escritura de ficheros descriptivos en el repositorio como el fichero de descripción del repositorio <em>README.md</em> o este mismo documento.</p></li>
+</ul>
+<p>Se asume se ha instalado y configurado las herramientas anteriormente mencionadas antes de seguir con la práctica (a excepción de <em>Git</em>).</p>
+<h2 id="previo">Previo</h2>
+<p>Previo al desarrollo de la práctica, debemos instalar el software de <em>Git</em> que gestionará las versiones de nuestra aplicación.</p>
+<h3 id="instalaci&#xF3;n-de-_git_">Instalación de <em>Git</em></h3>
+<p>En muchas distribuciones de Linux, el software de <em>Git</em> viene incluido por defecto. En otras, y en sistemas <em>Microsoft Windows</em> se requiere instalación de éste.</p>
+<p>Podemos comprobar si disponemos de una instalación de <em>Git</em> bien configurada abriendo una terminal y escribiendo el comando<br>
+<code>git version</code></p>
+<p>Esto nos debería mostrar la versión del software de <em>Git</em> si éste se encuentra instalado. En caso de no reconocer el comando, quizás no hemos configurado bien la instalación (falta añadir el binario de <em>Git</em> a la variable de entorno <code>PATH</code>) o no tenemos el software instalado.</p>
+<p>Para instalarlo en distribuciones <em>Debian</em> y derivadas como <em>Ubuntu</em>, podemos escribir en una terminal:</p>
+<pre class="editor-colors lang-bash"><div class="line"><span class="mpe-syntax--source mpe-syntax--shell"><span>sudo&nbsp;apt&nbsp;install&nbsp;git</span></span></div></pre>
+<p>Para otros sistemas operativos, los binarios y guías de instalación se encuentran en el sitio oficial:<br>
+<center><a href="https://git-scm.com/downloads">https://git-scm.com/downloads</a></center></p>
+<h3 id="configuraci&#xF3;n-del-cliente-_git_">Configuración del cliente <em>Git</em></h3>
+<h4 id="configuraci&#xF3;n-de-usuario">Configuración de usuario</h4>
+<p>Una vez tenemos instalado y configurado <em>Git</em> para su uso desde una terminal, procedemos a configurar el cliente de <em>Git</em>. Los parámetros básicos que necesitamos configurar es nuestro nombre y correo electrónico para asignarlos a nuestros <em>commits</em> o aportaciones al proyecto.</p>
+<p>Para configurar estos parámetros de forma global para cualquier repositorio que gestionemos con <em>Git</em>, debemos escribir los siguientes comandos:<br>
+<code>git config --global user.name &quot;John Doe&quot;</code><br>
+<code>git config --global user.email &quot;email@example.org&quot;</code><br>
+La explicación de los comandos es la siguiente:</p>
+<ul>
+<li><p><strong>Comando <code>git</code>:</strong> indica que usaremos el software de <em>Git</em> anteriormente instalado</p></li>
+<li><p><strong>Parámetro <code>config</code>:</strong> indica que vamos a realizar operaciones de configuración</p></li>
+<li><p><strong>Parámetro <code>--global</code>:</strong> especifica que deseamos realizar operaciones sobre la configuración global del usuario. En caso de no especificarlo, la configuración que gestionamos es la del repositorio actual (o error si no nos encontramos en ninguno)</p></li>
+<li><p><strong>Parámetro <code>user.name</code> / <code>user.email</code>:</strong> define que deseamos obtener o modificar nuestro nombre / correo electrónico. Si no añadimos ningún parámetro más, mostrará la configuración actual, si añadimos un parámetro más como hemos hecho, establecerá el valor del nombre / correo electrónico.</p></li>
+<li><p><strong>Valores <code>John D</code></strong>: valores a los que establecer el nombre / correo electrónico</p></li>
+</ul>
+<blockquote>
+<p>Nota: pese a que no hay especificación o convención sobre el nombre de usuario a especificar como valor del <code>user.name</code> para aparecer en los commit, se suele usar nuestro nombre seguido de iniciales o apellido (<code>John DS</code> o <code>John Doe Smith</code>) o bien nuestro <em>nickname</em> (<code>johndoes</code>)</p>
+</blockquote>
+<h4 id="configuraci&#xF3;n-_pgp_">Configuración <em>PGP</em></h4>
+<p>Una buena práctica, aunque opcional, cuando usamos <em>Git</em>, es firmar digitalmente las <em>releases</em>, es decir las <em>tags</em>, con nuestra llave <em>PGP</em> de manera que el cliente pueda verificar la integridad de las <em>releases</em>.</p>
+<blockquote>
+<p>Suponemos que ya tenemos configurada nuestra llave PGP con un software PGP tal como GPG o GPG2. Para más información sobre cómo configurar un software PGP para su uso en terminal y crear una llave PGP, el software GPG que implementa PGP provee de información para uso y configuración:<br>
+<center><a href="https://www.gnupg.org">https://www.gnupg.org</a></center></p>
+</blockquote>
+<p>Si ya tenemos bien configurado nuestro software <em>PGP</em>, ya estamos listos para firmar nuestras <em>releases</em> como veremos más adelante.</p>
+<p>Sin embargo, por defecto los valores de configuración para firmar digitalmente con PGP pueden ser incorrectos. Por ello, podemos configurar los siguientes valores de la configuración siguiendo los mismos pasos que para configurar nuestro nombre y correo electrónico</p>
+<ul>
+<li><p><code>gpg.program</code>: permite establecer el programa que se usará para firmar. Debe estar disponible des de la línea de comandos.<br>
+Por defecto su valor es <code>gpg</code></p></li>
+<li><p><code>user.signingKey</code>: especifica el identificador corto (8 caracteres) de la llave que usaremos para firmar.<br>
+Por defecto busca en el software que usemos las llaves disponibles y busca aquella que coincida con el correo establecido anteriormente (<code>user.email</code>)</p></li>
+<li><p><code>commit.gpgSign</code>: establece que todos los <em>commit</em> se firmen digitalmente por defecto. Por defecto está deshabilitado.</p></li>
+<li><p><code>push.gpgSign</code>: establece que todos los <em>push</em> se firmen digitalmente por defecto. Por defecto está deshabilitado.</p></li>
+</ul>
+<blockquote>
+<p>Los valores de configuración son <em>case-independent</em>, de manera que no afecta si las variables las escribimos con mayúsculas o minúsculas (luego <code>user.signingKey</code> es equivalente a <code>user.signingkey</code>)</p>
+</blockquote>
+<h2 id="desarrollo">Desarrollo</h2>
+<p>Una vez tenemos configurado el entorno de <em>Git</em> correctamente, procedemos a crear nuestro repositorio y comenzar con el desarrollo del proyecto.</p>
+<h3 id="designaci&#xF3;n-de-&#xED;tems-de-configuraci&#xF3;n">Designación de ítems de configuración</h3>
+<p>Antes de todo, debemos crear un nuevo repositorio que contendrá nuestros ítems de configuración. Para ellos debemos definir cuales serán estos mismos.</p>
+<h4 id="&#xED;tems-del-proyecto">Ítems del proyecto</h4>
+<p>Por esa razón, empezaremos por listar con que elementos contamos en nuestro proyecto. En nuestro proyecto contamos (técnicamente, contaremos cuando creemos el proyecto en <em>Eclipse</em>) con los siguientes ficheros:</p>
+<ul>
+<li><p><code>src/*.java</code>: Ficheros de código fuente en <em>Java</em></p></li>
+<li><p><code>bin/*.class</code>: Binarios del código fuente compilado</p></li>
+<li><p><code>.classpath</code>: Fichero con rutas a considerar para el compilado (ficheros a incluir, destino de los binarios)</p></li>
+<li><p><code>.project</code>: Fichero de configuración de proyecto de <em>Eclipse</em></p></li>
+<li><p><code>.settings</code>: Directorio con preferencias para el proyecto de <em>Eclipse</em>, como la versión de <em>Java JRE</em> con la que ejecutar los binarios</p></li>
+<li><p><code>GenVersiones.bat</code>: fichero con script para generar directorios con las versiones del proyecto para su posterior comprobación y corrección</p></li>
+<li><p><code>Corrector.bat</code>: fichero con script para comprobar que las salidas del programa son correctas en función de las salidas correctas y ejecutadas</p></li>
+<li><p><code>SalidaPractica</code>: directorio con ficheros de texto que contienen la salida de la práctica en diferentes versiones dados diferentes comandos. Generada por el script <code>Corrector.bat</code></p></li>
+<li><p><code>SalidaCorrecta</code>: directorio con ficheros de texto que contienen la salida de la práctica de referencia que debe proporcionar cada versión dados diferentes comandos</p></li>
+<li><p><code>Comandos*.txt</code>: comandos a ejecutar para cada <em>release</em> del software para comprobar su salida con los ficheros del directorio <code>SalidaCorrecta</code> y verificar que el programa se ejecuta correctamente</p></li>
+</ul>
+<h4 id="&#xED;tems-de-configuraci&#xF3;n">Ítems de configuración</h4>
+<p>Una vez listados los elementos de nuestro proyecto y su funcionalidad, procedemos a listar aquellos que no serán parte de los ítems de configuración.</p>
+<blockquote>
+<p>Git en lugar de permitir especificar los ítems de configuración, permite especificar aquellos ítems que no serán de configuración como veremos más adelante y todo lo restante lo considerará ítem de configuración (una vez lo añadamos al índice de ficheros <em>tracked</em>)</p>
+</blockquote>
+<blockquote>
+<p>Dado que debemos especificar manualmente que ficheros entran al índice de seguimiento de Git para que los considere parte del repositorio, puede parecer que no sea necesario especificar los no-ítems de configuración, pero su especificación nos ayudará cuando realicemos comandos del tipo <code>git add *</code>, que añadirá totdos los ficheros al índice excepto aquellos que no sean ítems de configuración (que estén en la lista de excepciones)</p>
+</blockquote>
+<p>Consideramos que los siguientes ítems no formaran parte de los ítems de configuración, por las siguientes razones:</p>
+<ul>
+<li><p><code>GenVersiones.bat</code>, <code>Corrector.bat</code>: es de uso meramente académico y no forma parte del programa en sí. No se requiere para compilar y generar una versión del software ni proporciona ninguna ayuda a ello.<br><br>
+Tampoco lo hemos considerado herramienta de test por su sencillez. Además los tests automatizados en <em>Git</em> se suelen almacenar o ejecutar en otros lugares, como en el caso de la herramienta <em>Travis CI</em>:<br>
+<center><a href="https://travis-ci.org/">https://travis-ci.org/</a></center></p></li>
+<li><p><code>Comandos*.txt</code>, <code>SalidaCorrecta</code>, <code>SalidaPractica</code>: dado que no se requieren los ficheros anteriores, estos carecen de utilidad si los anteriores no se incluyen. En el caso de <code>SalidaCorrecta</code>, dado que su uso es académico y no realmente forma parte de un test de la aplicación, tampoco se incluye. Se supone los participantes de la práctica pueden descargarse esos ficheros manualmente si requieren de su uso.</p></li>
+</ul>
+<p>Recordaremos estos ficheros cuando especifiquemos las excepciones de ítems de configuración más adelante.</p>
+<h4 id="creaci&#xF3;n-del-repositorio">Creación del repositorio</h4>
+<ol>
+<li><p>En primer lugar, nos situamos con una terminal abierta en el directorio donde deseamos crear nuestro proyecto.</p></li>
+<li><p>Creamos el proyecto de <em>Java</em> en <em>Eclipse</em> en un nuevo directorio dentro de éste.</p></li>
+<li><p>En la terminal, nos movemos al nuevo directorio creado por <em>Eclipse</em> que contendrá nuestro proyecto e inicializamos el directorio como contenedor de un repositorio de <em>Git</em> con la siguiente órden:<br>
+<code>cd facturacion &amp;&amp; git init</code></p></li>
+<li><p>Especificamos ítems de configuración. Para ello, recordemos debemos especificar las excepciones de ítems de configuración.</p></li>
+</ol>
+<p>Debemos especificarlos en un fichero llamado <code>.gitignore</code>. Para ello, introducimos el siguiente comando:<br>
+<code>nano .gitignore</code> / <code>notepad .gitignore</code> (en <em>Windows</em>)</p>
+<p>El fichero <code>.gitignore</code> nos permite especificar expresiones regulares para designar los ficheros que no formarán parte de los ítems de configuración. Para saber más sobre su sintaxis:<br>
+<center><a href="https://git-scm.com/docs/gitignore">https://git-scm.com/docs/gitignore</a></center><br>
+Introducimos el siguiente contenido:</p>
+<pre class="editor-colors lang-text"><div class="line"><span class="mpe-syntax--text mpe-syntax--plain"><span class="mpe-syntax--meta mpe-syntax--paragraph mpe-syntax--text"><span>#&nbsp;Correctores</span></span></span></div><div class="line"><span class="mpe-syntax--text mpe-syntax--plain"><span class="mpe-syntax--meta mpe-syntax--paragraph mpe-syntax--text"><span>/Corrector.bat</span></span></span></div><div class="line"><span class="mpe-syntax--text mpe-syntax--plain"><span class="mpe-syntax--meta mpe-syntax--paragraph mpe-syntax--text"><span>/GenVersiones.bat</span></span></span></div><div class="line"><span class="mpe-syntax--text mpe-syntax--plain"><span>&nbsp;</span></span></div><div class="line"><span class="mpe-syntax--text mpe-syntax--plain"><span class="mpe-syntax--meta mpe-syntax--paragraph mpe-syntax--text"><span>#&nbsp;Comandos</span></span></span></div><div class="line"><span class="mpe-syntax--text mpe-syntax--plain"><span class="mpe-syntax--meta mpe-syntax--paragraph mpe-syntax--text"><span>comandos*.txt</span></span></span></div><div class="line"><span class="mpe-syntax--text mpe-syntax--plain"><span class="mpe-syntax--meta mpe-syntax--paragraph mpe-syntax--text"><span>Comandos*.txt</span></span></span></div><div class="line"><span class="mpe-syntax--text mpe-syntax--plain"><span>&nbsp;</span></span></div><div class="line"><span class="mpe-syntax--text mpe-syntax--plain"><span class="mpe-syntax--meta mpe-syntax--paragraph mpe-syntax--text"><span>#&nbsp;Ejecuciones&nbsp;del&nbsp;programa</span></span></span></div><div class="line"><span class="mpe-syntax--text mpe-syntax--plain"><span class="mpe-syntax--meta mpe-syntax--paragraph mpe-syntax--text"><span>/SalidaCorrecta/*</span></span></span></div><div class="line"><span class="mpe-syntax--text mpe-syntax--plain"><span class="mpe-syntax--meta mpe-syntax--paragraph mpe-syntax--text"><span>/SalidaPractica/*</span></span></span></div></pre>
+<p>Puesto que es un proyecto <em>Java</em>, hemos decidido eliminar las compilaciones del repositorio, pero quizás hay otros ficheros que no són del código fuente que <em>Java</em> genera y tampoco deseamos.</p>
+<p>Hay un repositorio online, alojado en <em>Github</em> que contiene los ítems de configuración a excluir básicos según el lenguaje de programación:<br>
+<center><a href="https://github.com/github/gitignore">https://github.com/github/gitignore</a></center><br>
+Buscamos el de <em>Java</em> y añadimos su contenido al fichero:</p>
+<pre class="editor-colors lang-text"><div class="line"><span class="mpe-syntax--text mpe-syntax--plain"><span class="mpe-syntax--meta mpe-syntax--paragraph mpe-syntax--text"><span>#&nbsp;Compiled&nbsp;class&nbsp;file</span></span></span></div><div class="line"><span class="mpe-syntax--text mpe-syntax--plain"><span class="mpe-syntax--meta mpe-syntax--paragraph mpe-syntax--text"><span>*.class</span></span></span></div><div class="line"><span class="mpe-syntax--text mpe-syntax--plain"><span>&nbsp;</span></span></div><div class="line"><span class="mpe-syntax--text mpe-syntax--plain"><span class="mpe-syntax--meta mpe-syntax--paragraph mpe-syntax--text"><span>#&nbsp;Log&nbsp;file</span></span></span></div><div class="line"><span class="mpe-syntax--text mpe-syntax--plain"><span class="mpe-syntax--meta mpe-syntax--paragraph mpe-syntax--text"><span>*.log</span></span></span></div><div class="line"><span class="mpe-syntax--text mpe-syntax--plain"><span>&nbsp;</span></span></div><div class="line"><span class="mpe-syntax--text mpe-syntax--plain"><span class="mpe-syntax--meta mpe-syntax--paragraph mpe-syntax--text"><span>#&nbsp;BlueJ&nbsp;files</span></span></span></div><div class="line"><span class="mpe-syntax--text mpe-syntax--plain"><span class="mpe-syntax--meta mpe-syntax--paragraph mpe-syntax--text"><span>*.ctxt</span></span></span></div><div class="line"><span class="mpe-syntax--text mpe-syntax--plain"><span>&nbsp;</span></span></div><div class="line"><span class="mpe-syntax--text mpe-syntax--plain"><span class="mpe-syntax--meta mpe-syntax--paragraph mpe-syntax--text"><span>#&nbsp;Mobile&nbsp;Tools&nbsp;for&nbsp;Java&nbsp;(J2ME)</span></span></span></div><div class="line"><span class="mpe-syntax--text mpe-syntax--plain"><span class="mpe-syntax--meta mpe-syntax--paragraph mpe-syntax--text"><span>.mtj.tmp/</span></span></span></div><div class="line"><span class="mpe-syntax--text mpe-syntax--plain"><span>&nbsp;</span></span></div><div class="line"><span class="mpe-syntax--text mpe-syntax--plain"><span class="mpe-syntax--meta mpe-syntax--paragraph mpe-syntax--text"><span>#&nbsp;Package&nbsp;Files&nbsp;#</span></span></span></div><div class="line"><span class="mpe-syntax--text mpe-syntax--plain"><span class="mpe-syntax--meta mpe-syntax--paragraph mpe-syntax--text"><span>*.jar</span></span></span></div><div class="line"><span class="mpe-syntax--text mpe-syntax--plain"><span class="mpe-syntax--meta mpe-syntax--paragraph mpe-syntax--text"><span>*.war</span></span></span></div><div class="line"><span class="mpe-syntax--text mpe-syntax--plain"><span class="mpe-syntax--meta mpe-syntax--paragraph mpe-syntax--text"><span>*.ear</span></span></span></div><div class="line"><span class="mpe-syntax--text mpe-syntax--plain"><span class="mpe-syntax--meta mpe-syntax--paragraph mpe-syntax--text"><span>*.zip</span></span></span></div><div class="line"><span class="mpe-syntax--text mpe-syntax--plain"><span class="mpe-syntax--meta mpe-syntax--paragraph mpe-syntax--text"><span>*.tar.gz</span></span></span></div><div class="line"><span class="mpe-syntax--text mpe-syntax--plain"><span class="mpe-syntax--meta mpe-syntax--paragraph mpe-syntax--text"><span>*.rar</span></span></span></div><div class="line"><span class="mpe-syntax--text mpe-syntax--plain"><span>&nbsp;</span></span></div><div class="line"><span class="mpe-syntax--text mpe-syntax--plain"><span class="mpe-syntax--meta mpe-syntax--paragraph mpe-syntax--text"><span>#&nbsp;virtual&nbsp;machine&nbsp;crash&nbsp;logs,&nbsp;see&nbsp;</span><span class="mpe-syntax--markup mpe-syntax--underline mpe-syntax--link mpe-syntax--http mpe-syntax--hyperlink"><span>http://www.java.com/en/download/help/error_hotspot.xml</span></span></span></span></div><div class="line"><span class="mpe-syntax--text mpe-syntax--plain"><span class="mpe-syntax--meta mpe-syntax--paragraph mpe-syntax--text"><span>hs_err_pid*</span></span></span></div></pre>
+<p>Guardamos el fichero y ya tenemos el repositorio listo para albergar nuestro proyecto</p>
+<blockquote>
+<p>También existe otro fichero, llamado <code>.gitattributes</code> que nos permite especificar algunos atributos interesantes para el repositorio como su nombre indica. En nuestro caso, usaremos el fichero con el siguiente contenido:<br>
+<code>* text eol=lf</code><br>
+Esto hará que <em>Git</em> convierta los fines de línea a <code>\n</code> (<code>LF</code>) en lugar de <code>\r\n</code> (<code>CRLF</code>) cuando se realice un <em>commit</em>. Esto nos permite trabajar cómodamente en <em>Microsoft Windows</em> y sistemas <em>UNIX</em>, puesto que no habrá errores con los fínes de línea y todos serán homogéneos en el repositorio, pese a que localmente puedan ser diferentes.<br>
+Todo se debe a que nuestro equipo de desarrolladores tiene preferencias distintas por sus sistemas operativos favoritos</p>
+</blockquote>
+<p>Realizamos el primer commit con dichos ficheros que definirán nuestro repositorio. Para ello, añadimos los ficheros al índice:<br>
+<code>git add *</code><br>
+Y realizamos un <em>commit</em> con un mensaje<br>
+<code>git commit -m &quot;Initial commit&quot;</code></p>
+<blockquote>
+<p>Si no especificamos <code>-m</code> y nuestro mensaje, se abrirá un editor de texto para especificarlo allí. En <em>Windows</em> dicho editor es <code>vim</code>. Pulsamos <code>Insert</code> si requerimos entrar en el modo edición, escribimos nuestro mensaje y a continuación <code>Esc</code> y <code>:wq</code> e <code>Intro</code> para guardar.</p>
+</blockquote>
+<h3 id="a&#xF1;adiendo-el-c&#xF3;digo-fuente-existente">Añadiendo el código fuente existente</h3>
+<ol>
+<li><p>Descargamos código fuente del material</p></li>
+<li><p>Copiamos código fuente de proyecto en el directorio destinado a ello: <code>src</code></p></li>
+<li><p>Comprobamos que <em>Eclipse</em> ejecuta bien el programa refrescando la carpeta <code>src</code> y añadiendo una <em>Run Configuration</em> que toma como parámetro el fichero de comandos de la primera versión.</p></li>
+<li><p>Con la ejecución correcta, añadimos los ficheros al índice y realizamos el primer <em>commit</em> con el código fuente del programa.<br>
+<code>git add *</code><br>
+<code>git commit -m &quot;Added Eclipse project &amp; source files&quot;</code></p></li>
+</ol>
+<h3 id="a&#xF1;adiendo-un-repositorio-remoto">Añadiendo un repositorio remoto</h3>
+<p>Ahora necesitamos sincronizar nuestro repositorio local con uno remoto para permitir a los demás desarrolladores trabajar conjuntamente.</p>
+<p>Para ello, añadiremos un remoto al repositorio local:</p>
+<pre class="editor-colors lang-text"><div class="line"><span class="mpe-syntax--text mpe-syntax--plain"><span class="mpe-syntax--meta mpe-syntax--paragraph mpe-syntax--text"><span>git&nbsp;remote&nbsp;add&nbsp;bitbucket&nbsp;\</span></span></span></div><div class="line"><span class="mpe-syntax--text mpe-syntax--plain"><span class="mpe-syntax--meta mpe-syntax--paragraph mpe-syntax--text"><span>git@bitbucket.org:uab-projects/facturacion_1212586_1359958</span></span></span></div></pre>
+<p>Con este comando añadimos un repositorio remoto al cual llamaremos <code>bitbucket</code> y que se encuentra en la siguiente URL:</p>
+<pre class="editor-colors lang-text"><div class="line"><span class="mpe-syntax--text mpe-syntax--plain"><span class="mpe-syntax--meta mpe-syntax--paragraph mpe-syntax--text"><span>git@bitbucket.org:uab-projects/facturacion_1212586_1359958</span></span></span></div></pre>
+<p>que hemos obtenido cuando lo creamos en la plataforma <code>Bitbucket</code></p>
+<p>A continuación debemos debemos establecer en la rama <code>master</code> (rama por defecto en la cual hemos realizado los previos commits) que el repositorio remoto al cual subir los cambios en ésta es el que acabamos de añadir. A continuación subiremos los <em>commits</em> realizados. Realizamos las dos acciones con el comando:<br>
+<code>git push -u bitbucket master</code></p>
+<h3 id="primera-_release_">Primera <em>release</em></h3>
+<p>A continuación debemos marcar esta versión como la primera release, con la etiqueta <code>ReleaseMJ1.0</code>.</p>
+<p>Para ello usamos el siguiente commando<br>
+<code>git tag -s &quot;ReleaseMJ1.0&quot; -m &quot;Port from source files into Git&quot;</code></p>
+<p>Que creará un <em>tag</em> firmado (argumento <code>-s</code>) llamado <code>ReleaseMJ1.0</code> con el mensaje <code>Port from source files into Git</code>. Si deseamos realizar un <em>tag</em> no firmado, usamos en lugar de <code>-s</code>, <code>-a</code></p>
+<p>Finalmente, subimos el <em>tag</em> al repositorio <code>bitbucket</code> con el comando:<br>
+<code>git push --tags</code><br>
+Por defecto <code>git push</code> no sube las <em>tags</em>. El comando lo sube al remoto <code>bitbucket</code> puesto que es el único que encuentra.</p>
+<h3 id="rama-de-desarrollo">Rama de desarrollo</h3>
+<p>A continuación debemos implementar el primer cambio, el listado de facturas. Para ello, antes creamos una nueva rama de desarrollo llamada <code>development</code> y actualizaremos el remoto con ésta.<br>
+<code>git checkout -b development</code><br>
+Creamos una rama llamada <code>development</code> (que parte de la actual, <code>master</code>) y nos cambiamos a ella.<br>
+<code>git push -u bitbucket development</code><br>
+Actualizamos el repositorio remoto <code>bitbucket</code>, añadiendo la nueva rama <code>development</code></p>
+<h3 id="listado-de-facturas-i">Listado de facturas (I)</h3>
+<p>Ahora, que ya estamos en la rama de desarrollo, creamos una nueva rama para desarrollar esta característica y nos situamos en ella.<br>
+<code>git checkout -b list-invoice</code></p>
+<p>Realizamos los cambios necesarios para imprimir facturas, hasta que nos damos cuenta que falta el precio del producto. Con la funcionalidad presente, que imprime facturas con precio 0, realizamos un <em>commit</em> en la rama.<br>
+<code>git commit -a -m &quot;Print invoices implemented&quot;</code></p>
+<p>La orden anterior, ya nos añade los ficheros modificados (que están presentes en el índice) al <em>commit</em> con el argumento <code>-a</code>.</p>
+<p>Subimos los cambios al repositorio remoto, a la misma vez que especificamos el repositorio remoto de esta rama<br>
+<code>git push -u bitbucket list-invoice</code></p>
+<blockquote>
+<p>Hemos realizado un <em>commit</em> con éstos cambios y no con la funcionalidad entera ya que debemos cambiar a otra rama para fijar un error en la siguiente sección y en <em>Git</em> no se permite cambiar a una rama habiendo ficheros modificados en el índice para prevenir errores.<br>
+Si el desarrollador que fija la release fuera uno diferente, entonces podríamos realizar un sólo <em>commit</em> con todos los cambios realizados para el correcto listado de facturas puesto que el desarrollador que implementara el <em>bugfix</em> de la siguiente sección no estaría desarrollando esta característica y puede libremente cambiar de rama siempre y cuando no tenga él tampoco ningún fichero modificado.</p>
+</blockquote>
+<h3 id="fijaci&#xF3;n-de-release-releasemj10">Fijación de release <code>ReleaseMJ1.0</code></h3>
+<p>El cliente nos informa de que ha aparecido un error en la <em>release</em> anterior que permite la existencia de clientes duplicados. Debemos volver a la <code>master</code>, donde se encuentra la <code>ReleaseMJ1.0</code> y realizar los cambios.</p>
+<p>Para ello, volvemos a la <code>master</code>, que ya se encuentra en la <code>ReleaseMJ1.0</code> y abrimos una nueva rama llamada <code>hotfix</code> para fijar el error.<br>
+<code>git checkout master</code></p>
+<p>También podríamos haber usado para ser más precisos:<br>
+<code>git checkout ReleaseMJ1.0</code></p>
+<p>Abrimos la nueva rama para fijar el error<br>
+<code>git checkout -b hotfix</code></p>
+<p>Fijamos el error y realizamos un <em>commit</em> con los cambios<br>
+<code>git commit -a -m &quot;Bug fix: No repeated clients &amp; ids&quot;</code></p>
+<p>A continuación, debemos juntar los cambios con la rama <code>master</code>, para ello, nos movemos a la rama <code>master</code> y realizamos una operación <code>merge</code>:<br>
+<code>git checkout master &amp;&amp; git merge hotfix</code></p>
+<p><em>Git</em> automáticamente ha combinado correctamente los cambios con la <em>release</em> anterior.</p>
+<p>Creamos la nueva <em>release</em> con el cambio fijado y actualizamos las <em>tags</em> remotas<br>
+<code>git tag -s ReleaseMJ1.1 -m &quot;Bug fix: No repeated clients &amp; ids&quot; &amp;&amp; git push --tags</code><br>
+La última orden ya sube los cambios con el <em>bugfix</em> y la nueva <em>tag</em> de la última <em>release</em></p>
+<h3 id="listado-de-facturas-ii">Listado de facturas (II)</h3>
+<p>A continuación seguimos con la implementación del listado de facturas. Nos falta añadir el precio y la línea de producto en la factura.</p>
+<blockquote>
+<p>Nótese cómo anteriormente hemos resaltado que en un equipo de varios desarrolladores, se podría trabajar en el <em>bugfix</em> anterior mientras otro desarrollador continua su implementaicón del listado de facturas en paralelo, puesto que el error no le produce un impedimento para continuar desarrollando esta característica.<br>
+De esta forma, la presente sección y la anterior podrían ejecutarse simultáneamente por dos desarrolladores distintos, mientras que esta sección y la anterior a la previa serían desarrolladas por el mismo desarrollador.</p>
+</blockquote>
+<p>Realizamos un <em>commit</em> con los cambios con el listado de facturas y la modificación de los precios ya implementadas.<br>
+<code>git add * &amp;&amp; git commit -m &quot;Print invoices completed&quot;</code></p>
+<p>Hemos usado el comando <code>git add *</code> puesto que hay nuevos ficheros que hay que indicar que pertenezcan al índice (son ficheros de configuración).</p>
+<p>Ahora juntamos los cambios con la rama <code>development</code>:<br>
+<code>git checkout development &amp;&amp; git merge list-invoice</code></p>
+<h3 id="segunda-release-releasemj20">Segunda release <code>ReleaseMJ2.0</code></h3>
+<p>A continuación antes de lanzar la segunda <em>release</em> (<em>release</em> mayor), debemos actualizar la rama <code>development</code> para que tenga el error de la <code>ReleaseMJ1.1</code> fijado, ya que recordemos la rama <code>development</code> parte de <code>master</code> en la versión <code>ReleaseMJ1.0</code>. Para ello usamos el siguiente comando:<br>
+<code>git rebase master</code></p>
+<p><em>Git</em> mezcla los cambios, pero detecta un conflicto que no puede solucionar en <code>src\CMain.java</code>, por lo que abrimos el fichero con <em>Eclipse</em> y solucionamos manualmente los cambios.</p>
+<p>Esto sucede porque tanto la funcionalidad de listar facturas como el fijado del error han tocado el mismo fichero, <code>src\CMain.java</code>.</p>
+<p>Nos fijamos en el fichero en los segmentos marcados con caracteres separadores del tipo:</p>
+<pre class="editor-colors lang-text"><div class="line"><span class="mpe-syntax--text mpe-syntax--plain"><span class="mpe-syntax--meta mpe-syntax--paragraph mpe-syntax--text"><span>======================&nbsp;HEAD</span></span></span></div><div class="line"><span class="mpe-syntax--text mpe-syntax--plain"><span class="mpe-syntax--meta mpe-syntax--paragraph mpe-syntax--text"><span>----------------------</span></span></span></div><div class="line"><span class="mpe-syntax--text mpe-syntax--plain"><span class="mpe-syntax--meta mpe-syntax--paragraph mpe-syntax--text"><span>======================&nbsp;Print&nbsp;invoices&nbsp;completed</span></span></span></div></pre>
+<p>Allí nos muestra las dos versiones con conflicto y nosotros debemos encargarnos de eliminar una u otra o realizar los cambios pertinentes para completar el <code>rebase</code> (incluyendo eliminar los separadores)</p>
+<p>Cuando ya tengamos el fichero <code>src\CMain.java</code> fijado, añadimos el fichero al índice para indicar a <em>Git</em> que los conflictos ya se han solucionado y le indicamos a <em>Git</em> que debe finalizar el <code>rebase</code><br>
+<code>git add src\CMain.java &amp;&amp; git rebase --continue</code></p>
+<p>Finalmente, juntamos la rama <code>development</code> con la <code>master</code> y creamos la <em>release</em><br>
+<code>git checkout master &amp;&amp; git merge development</code><br>
+<code>git tag -s ReleaseMJ2.0 -m &quot;Print invoices implemented&quot;</code></p>
+
+
+  </body>
+  
+</html>

@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    
+
 
     <style>
     .markdown-preview-enhanced pre.editor-colors.editor-colors,
@@ -830,7 +830,7 @@ pre.editor-colors .search-results .mpe-syntax--marker.current-result .region {
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css">
 
-    
+
   </head>
   <body class="markdown-preview-enhanced  " >
 
@@ -864,6 +864,7 @@ Curso 2016-2017<br>
 <li><p>Lenguaje <em>markdown</em> para la escritura de ficheros descriptivos en el repositorio como el fichero de descripción del repositorio <em>README.md</em> o este mismo documento.</p></li>
 </ul>
 <p>Se asume se ha instalado y configurado las herramientas anteriormente mencionadas antes de seguir con la práctica (a excepción de <em>Git</em>).</p>
+<div style="page-break-after: always;"></div>
 <h2 id="previo">Previo</h2>
 <p>Previo al desarrollo de la práctica, debemos instalar el software de <em>Git</em> que gestionará las versiones de nuestra aplicación.</p>
 <h3 id="instalaci&#xF3;n-de-_git_">Instalación de <em>Git</em></h3>
@@ -911,6 +912,7 @@ Por defecto busca en el software que usemos las llaves disponibles y busca aquel
 <blockquote>
 <p>Los valores de configuración son <em>case-independent</em>, de manera que no afecta si las variables las escribimos con mayúsculas o minúsculas (luego <code>user.signingKey</code> es equivalente a <code>user.signingkey</code>)</p>
 </blockquote>
+<div style="page-break-after: always;"></div>
 <h2 id="desarrollo">Desarrollo</h2>
 <p>Una vez tenemos configurado el entorno de <em>Git</em> correctamente, procedemos a crear nuestro repositorio y comenzar con el desarrollo del proyecto.</p>
 <h3 id="designaci&#xF3;n-de-&#xED;tems-de-configuraci&#xF3;n">Designación de ítems de configuración</h3>
@@ -1056,14 +1058,111 @@ De esta forma, la presente sección y la anterior podrían ejecutarse simultáne
 <p>Esto sucede porque tanto la funcionalidad de listar facturas como el fijado del error han tocado el mismo fichero, <code>src\CMain.java</code>.</p>
 <p>Nos fijamos en el fichero en los segmentos marcados con caracteres separadores del tipo:</p>
 <pre class="editor-colors lang-text"><div class="line"><span class="mpe-syntax--text mpe-syntax--plain"><span class="mpe-syntax--meta mpe-syntax--paragraph mpe-syntax--text"><span>======================&nbsp;HEAD</span></span></span></div><div class="line"><span class="mpe-syntax--text mpe-syntax--plain"><span class="mpe-syntax--meta mpe-syntax--paragraph mpe-syntax--text"><span>----------------------</span></span></span></div><div class="line"><span class="mpe-syntax--text mpe-syntax--plain"><span class="mpe-syntax--meta mpe-syntax--paragraph mpe-syntax--text"><span>======================&nbsp;Print&nbsp;invoices&nbsp;completed</span></span></span></div></pre>
-<p>Allí nos muestra las dos versiones con conflicto y nosotros debemos encargarnos de eliminar una u otra o realizar los cambios pertinentes para completar el <code>rebase</code> (incluyendo eliminar los separadores)</p>
-<p>Cuando ya tengamos el fichero <code>src\CMain.java</code> fijado, añadimos el fichero al índice para indicar a <em>Git</em> que los conflictos ya se han solucionado y le indicamos a <em>Git</em> que debe finalizar el <code>rebase</code><br>
+<p>Allí nos muestra las dos versiones con conflicto y nosotros debemos encargarnos de eliminar una u otra o realizar los cambios pertinentes para completar el <em>rebase</em> (incluyendo eliminar los separadores)</p>
+<p>Cuando ya tengamos el fichero <code>src\CMain.java</code> fijado, añadimos el fichero al índice para indicar a <em>Git</em> que los conflictos ya se han solucionado y le indicamos a <em>Git</em> que debe finalizar el <em>rebase</em><br>
 <code>git add src\CMain.java &amp;&amp; git rebase --continue</code></p>
-<p>Finalmente, juntamos la rama <code>development</code> con la <code>master</code> y creamos la <em>release</em><br>
+<p>Finalmente, juntamos la rama <code>development</code> con la <code>master</code> y creamos y anotamos la <em>release</em><br>
 <code>git checkout master &amp;&amp; git merge development</code><br>
 <code>git tag -s ReleaseMJ2.0 -m &quot;Print invoices implemented&quot;</code></p>
+<h3 id="funcionalidad-de-listado-de-clientes">Funcionalidad de listado de clientes</h3>
+<p>Continuamos el desarrollo esta vez implementando la funcionalidad de listar clientes. Dado que es una nueva funcionalidad, nos situaremos de nuevo en la rama <code>development</code> y crearemos una nueva rama llamada <code>list-client</code>:<br>
+<code>git checkout development &amp;&amp; git checkout -b list-client</code></p>
+<p>Implementamos los cambios pertinentes en <code>src\CMain.java</code> y <code>src\CClientList.java</code> y una vez hemos finalizado, realizamos un <em>commit</em> con los cambios realizados:<br>
+<code>git commit -a -m &quot;Print clients completed&quot;</code></p>
+<blockquote>
+<p>Antes de realizar la operación de <em>merge</em>, se sugiere realizar la lectura del siguiente apartado del informe, ya que mientras se implementa esta característica, la siguiente se desarrolla en paralelo.</p>
+</blockquote>
+<p>Finalmente, juntaremos los cambios en la rama <code>development</code> realizando una operación <em>merge</em>.<br>
+<code>git checkout development &amp;&amp; git merge list-client</code></p>
+<p>Subimos los cambios para que nuestro compañero desarrollador pueda juntar sus cambios con los nuestros una vez finalice<br>
+<code>git push</code></p>
+<h3 id="funcionalidad-de-listado-de-productos">Funcionalidad de listado de productos</h3>
+<p>Al mismo tiempo que se desarrolla la característica anterior, otro desarrollador decide desarrollar en paralelo una nueva característica que permita listar productos. Para ello, este nuevo desarrollador, que tiene su rama <code>development</code> en la última versión <code>ReleaseMJ2.0</code>, crea una nueva rama <code>list-product</code> para desarrollar su característica.<br>
+<code>git checkout development &amp;&amp; git checkout list-product</code></p>
+<p>En este momento, tendremos que la característica de listado de clientes y productos se desarrollan en paralelo, cada una en su rama <code>list-client</code> y <code>list-product</code> respectivamente.</p>
+<p>Una vez finalizamos nuestros cambios, que implican los ficheros <code>src\CMain.java</code> y <code>src\CProductList.java</code>, realizamos un <em>commit</em> con los cambios:<br>
+<code>git commit -a -m &quot;Print products completed&quot;</code></p>
+<p>El otro desarrollador implementó su característica más rápido y ya hizo el <em>merge</em> con la rama <code>development</code>, ahora realizaremos un <em>merge</em> de nuestra rama con la <code>development</code>, previamente descargando del repositorio remoto la operación <em>merge</em> que nuestro compañero desarrollador realizó para juntar sus cambios.<br>
+<code>git checkout development &amp;&amp; git pull &amp;&amp; git merge list-product</code></p>
+<p>Nos produce conflictos de integración ya que hemos tocado el mismo fichero <code>src\CMain.java</code>, solucionamos los cambios de la misma forma que el último <em>merge</em> con problemas y finalizamos el <em>merge</em>:<br>
+<code>git add src\CMain.java &amp;&amp; git commit</code></p>
+<p>Subimos nuestros cambios de nuevo al repositorio remoto:<br>
+<code>git push</code></p>
+<blockquote>
+<p>Extra: normalmente, en un equipo más grande de desarrolladores, y con un proyecto mayor, cuando se desea implementar una característica o conjunto de características por un equipo, dentro de un proyecto con varios equipos, se realiza una operación <em>fork</em> que clona el estado del repositorio en un remoto diferente para cuando la característica se haya implementado (después de crear los <em>commit</em> y ramas necesarias en este repositorio clonado), realizar una operación <em>pull request</em> que solicite la integración de los cambios del repositorio clonado al repositorio original.<br>
+En un equipo pequeño, estas operaciones suponen un <em>overhead</em> no deseado e innecesario ya que se conocen las ramas existentes y su objetivo por lo que no habrá conflictos con ellas a la hora de crear nuevas o avisar a los desarrolladores cuando se estén realizando operaciones del tipo <em>merge</em> que impiden avanzar en una rama.</p>
+</blockquote>
+<h3 id="tercera-_release_-releasemj30">Tercera <em>release</em> <code>ReleaseMJ3.0</code></h3>
+<p>Comprobamos en la rama <code>development</code> que la salida es igual a la salida esperada y finalmente, juntamos la rama <code>development</code> con la <code>master</code> mediante una operación <em>merge</em> y anotamos la versión como una nueva <em>release</em>:<br>
+<code>git checkout master &amp;&amp; git merge development &amp;&amp; git tag -s ReleaseMJ3.0 -m &quot;List clients and products implemented&quot;</code></p>
+<p>Subimos la <em>tag</em> de la nueva <em>release</em> al repositorio remoto:<br>
+<code>git push --tags</code></p>
+<h3 id="nuevo-cliente-papeler&#xED;a-el-l&#xE1;piz-afilado">Nuevo cliente: Papelería el Lápiz Afilado</h3>
+<p>Llega un nuevo cliente y requiere de nuevos requisitos, entre los cuales destacan cambiar el nombre de Muebles José por el nombre de su establecimiento y alguna funcionalidad específica.</p>
+<p>Esto nos requiere cambiar el modelo de desarrollo y el objetivo de cada una de las ramas que habíamos creado hasta ahora.</p>
+<p>Requerimos ahora desarrollar <em>releases</em> para clientes diferentes, por lo que para no mezclar estas, partiremos de la <em>master</em> dos nuevas ramas, una para desarrollar características para cada cliente por separado.<br>
+<code>git checkout master &amp;&amp; git checkout -b lapiz-afilado</code><br>
+<code>git checkout master &amp;&amp; git checkout -b muebles-jose</code></p>
+<p>Cuando realicemos cambios para un cliente en específico los realizaremos sobre su rama o una subrama que parta de ésa y cuando necesitemos un cambio en ambos, modificaremos el núcleo de la aplicación, por lo tanto, afectando la rama <code>master</code>, que luego requerirá de un <em>rebase</em> de <code>lapiz-afilado</code> y <code>muebles-jose</code> para que adquieran ambos los nuevos cambios.</p>
+<h4 id="cambios-para-el-cliente-papeler&#xED;a-el-l&#xE1;piz-afilado">Cambios para el cliente Papelería el Lápiz Afilado</h4>
+<p>Ahora nos situamos en la rama <code>lapiz-afilado</code> para desarrollar las necesidades del cliente.<br>
+<code>git checkout lapiz-afilado</code></p>
+<h5 id="cambiar-el-nombre-en-los-listados">Cambiar el nombre en los listados</h5>
+<p>Cambiamos el nombre que aparece en los <em>print</em> para que coincidan con el nombre del nuevo establecimiento y realizamos un <em>commit</em> con los cambios<br>
+<code>git commit -a -m &quot;MJ's name changed by LLA's name&quot;</code></p>
+<blockquote>
+<p>En proyectos reales, esta configuración de usuario final como el nombre del establecimiento se guarda en un fichero de configuración personalizable cuyo contenido es un ítem de configuración como un fichero en formato <code>XML</code> o <code>JSON</code> de manera que se evita tener que crear una rama por cliente.<br>
+El crear una rama por cada cliente es una solución rápida al problema planteado para este proyecto trivial y no se recomienda en absoluto para proyectos más complejos en producción</p>
+</blockquote>
+<h5 id="a&#xF1;adir-fecha-de-factura">Añadir fecha de factura</h5>
+<p>Implementamos los cambios y realizamos un <em>commit</em> de nuevo con todos los ficheros modificados.<br>
+<code>git commit -a -m &quot;Added invoice calendar&quot;</code></p>
+<h5 id="permitir-modificar-fecha-de-factura">Permitir modificar fecha de factura</h5>
+<p>Implementamos los cambios y realizamos un <em>commit</em> de nuevo con todos los ficheros modificados.<br>
+<code>git commit -a -m &quot;Added invoice date modification&quot;</code></p>
+<h5 id="imprimir-factura-seg&#xFA;n-el-n&#xFA;mero-de-&#xE9;sta">Imprimir factura según el número de ésta</h5>
+<p>Desarrollamos los cambios y realizamos un <em>commit</em> con éstos<br>
+<code>git commit -a -m &quot;Added print invoice by number&quot;</code></p>
+<blockquote>
+<p>Quizás alguna de éstas características, sobretodo la impresión de facturas según su número, podríamos haberla realizado sobre la rama <code>master</code> para que ambos clientes pudieran disfrutar de ella aunque sólo Lápiz Afilado la hubiera solicitado proveyendo de extras a los clientes existentes.</p>
+</blockquote>
+<h5 id="fix-para-correcci&#xF3;n-correcta">Fix para corrección correcta</h5>
+<p>Realizamos también un <em>commit</em> para fijar un error en la salida que se adapte a la salida correcta a corregir<br>
+<code>git commit -a -m &quot;Fix, no descriptor in print header&quot;</code></p>
+<h4 id="primera-_release_-para-papeler&#xED;a-el-l&#xE1;piz-afilado-releasepla40">Primera <em>release</em> para Papelería el Lápiz Afilado <code>ReleasePLA4.0</code></h4>
+<p>Anotamos el primer <em>release</em> en la rama <code>lapiz-afilado</code> para su entrega al cliente:<br>
+<code>git tag -s ReleasePLA4.0 -m &quot;First release for LLA&quot;</code></p>
+<h3 id="error-facturas-con-n&#xFA;mero-replicado">Error facturas con número replicado</h3>
+<p>El cliente nuevo detecta un error que permite la inserción y modificación de facturas con el mismo número. Es por ello que se debe arreglar en ambas version ya que el cliente Muebles José también se ve afectado.</p>
+<p>Por ello, debemos crear una rama que parta de la <code>master</code> para fijar el error, y luego, con el <em>merge</em> sobre la <code>master</code> realizado de manera que ésta ya tenga los cambios con el error solucionado, hacer un <em>rebase</em> de la rama de cada cliente para actualizar sus respectivas versiones.</p>
+<h4 id="fijaci&#xF3;n-del-error">Fijación del error</h4>
+<p>Aprovechamos la rama antes creada de <code>hotfix</code> que parte de la <code>master</code> para arreglar el error allí, eso sí, actualizándola con la última versión de la rama <code>master</code><br>
+<code>git checkout hotfix &amp;&amp; git rebase master</code></p>
+<p>A continuación, fijamos el error para que lance una excepción en el caso que se desee modificar o introducir una factura con número ya existente y realizamos un <em>commit</em> con los cambios.<br>
+<code>git commit -a -m &quot;Fixed duplicated invoices identifier&quot;</code></p>
+<blockquote>
+<p>Realizamos un <em>commit</em> adicional para hacer coincidir el resultado de nuestra ejecución con el resultado esperado ya que hay un cambio inesperado en el resultado esperado no mencionado en el enunciado y sin sentido aparente ya que resta funcionalidad anteriormente implementada</p>
+</blockquote>
+<p>Finalmente, aplicamos una operación <em>merge</em> sobre la <code>master</code> con la rama presente<br>
+<code>git checokut master &amp;&amp; git merge hotfix</code></p>
+<h4 id="rebase-de-las-versiones">Rebase de las versiones</h4>
+<p>A continuación, vamos a la rama de cada uno de los clientes y hacemos un <em>rebase</em> para actualizar ambas versiones de ambos clientes con el error fijado.<br>
+<code>git checkout muebles-jose &amp;&amp; git rebase master</code><br>
+<code>git checkout lapiz-afilado &amp;&amp; git rebase master</code></p>
+<blockquote>
+<p>Hemos de resolver distintos errores de integración, sobretodo en el fichero <code>src\CMain.java</code>, de la misma forma que anteriores veces</p>
+</blockquote>
+<h3 id="releases-finales">Releases finales</h3>
+<p>Finalmente, y con los <em>merge</em> finalizados, comprobamos que las salidas sean correctas y lanzamos las etiquetas de las últimas <em>releases</em>:<br>
+<code>git checkout muebles-jose &amp;&amp; git tag -s ReleaseMJ3.1 -m &quot;Fixed duplicated invoices identifier&quot;</code><br>
+<code>git checkout lapiz-afilado &amp;&amp; git tag -s ReleasePLA4.0 -m &quot;Fixed duplicated invoices identifier&quot;</code></p>
+<p>Subimos al repositorio las nuevas etiquetas<br>
+<code>git push --tags</code></p>
+<blockquote>
+<p>Comentarios adicionales: subimos manualmente las ramas al repositorio con el comando <code>git push -u bitbucket &lt;rama&gt;</code> para cada una de las ramas listadas en <code>git branch -l</code></p>
+</blockquote>
 
 
   </body>
-  
+
 </html>

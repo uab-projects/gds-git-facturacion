@@ -32,6 +32,8 @@ Como herramientas durante el desarrollo, a parte de usar y aprender el software 
  - Lenguaje _markdown_ para la escritura de ficheros descriptivos en el repositorio como el fichero de descripción del repositorio _README.md_ o este mismo documento.
 
 Se asume se ha instalado y configurado las herramientas anteriormente mencionadas antes de seguir con la práctica (a excepción de _Git_).
+<div style="page-break-after: always;"></div>
+
 ## Previo
 Previo al desarrollo de la práctica, debemos instalar el software de _Git_ que gestionará las versiones de nuestra aplicación.
 ### Instalación de _Git_
@@ -82,6 +84,7 @@ Sin embargo, por defecto los valores de configuración para firmar digitalmente 
  - `push.gpgSign`: establece que todos los _push_ se firmen digitalmente por defecto. Por defecto está deshabilitado.
 
 > Los valores de configuración son _case-independent_, de manera que no afecta si las variables las escribimos con mayúsculas o minúsculas (luego `user.signingKey` es equivalente a `user.signingkey`)
+<div style="page-break-after: always;"></div>
 
 ## Desarrollo
 Una vez tenemos configurado el entorno de _Git_ correctamente, procedemos a crear nuestro repositorio y comenzar con el desarrollo del proyecto.
@@ -297,11 +300,132 @@ Nos fijamos en el fichero en los segmentos marcados con caracteres separadores d
 ====================== Print invoices completed
 ```
 
-Allí nos muestra las dos versiones con conflicto y nosotros debemos encargarnos de eliminar una u otra o realizar los cambios pertinentes para completar el `rebase` (incluyendo eliminar los separadores)
+Allí nos muestra las dos versiones con conflicto y nosotros debemos encargarnos de eliminar una u otra o realizar los cambios pertinentes para completar el _rebase_ (incluyendo eliminar los separadores)
 
-Cuando ya tengamos el fichero `src\CMain.java` fijado, añadimos el fichero al índice para indicar a _Git_ que los conflictos ya se han solucionado y le indicamos a _Git_ que debe finalizar el `rebase`
+Cuando ya tengamos el fichero `src\CMain.java` fijado, añadimos el fichero al índice para indicar a _Git_ que los conflictos ya se han solucionado y le indicamos a _Git_ que debe finalizar el _rebase_
 `git add src\CMain.java && git rebase --continue`
 
-Finalmente, juntamos la rama `development` con la `master` y creamos la _release_
+Finalmente, juntamos la rama `development` con la `master` y creamos y anotamos la _release_
 `git checkout master && git merge development`
 `git tag -s ReleaseMJ2.0 -m "Print invoices implemented"`
+
+### Funcionalidad de listado de clientes
+Continuamos el desarrollo esta vez implementando la funcionalidad de listar clientes. Dado que es una nueva funcionalidad, nos situaremos de nuevo en la rama `development` y crearemos una nueva rama llamada `list-client`:
+`git checkout development && git checkout -b list-client`
+
+Implementamos los cambios pertinentes en `src\CMain.java` y `src\CClientList.java` y una vez hemos finalizado, realizamos un _commit_ con los cambios realizados:
+`git commit -a -m "Print clients completed"`
+
+> Antes de realizar la operación de _merge_, se sugiere realizar la lectura del siguiente apartado del informe, ya que mientras se implementa esta característica, la siguiente se desarrolla en paralelo.
+
+Finalmente, juntaremos los cambios en la rama `development` realizando una operación _merge_.
+`git checkout development && git merge list-client`
+
+Subimos los cambios para que nuestro compañero desarrollador pueda juntar sus cambios con los nuestros una vez finalice
+`git push`
+
+### Funcionalidad de listado de productos
+Al mismo tiempo que se desarrolla la característica anterior, otro desarrollador decide desarrollar en paralelo una nueva característica que permita listar productos. Para ello, este nuevo desarrollador, que tiene su rama `development` en la última versión `ReleaseMJ2.0`, crea una nueva rama `list-product` para desarrollar su característica.
+`git checkout development && git checkout list-product`
+
+En este momento, tendremos que la característica de listado de clientes y productos se desarrollan en paralelo, cada una en su rama `list-client` y `list-product` respectivamente.
+
+Una vez finalizamos nuestros cambios, que implican los ficheros `src\CMain.java` y `src\CProductList.java`, realizamos un _commit_ con los cambios:
+`git commit -a -m "Print products completed"`
+
+El otro desarrollador implementó su característica más rápido y ya hizo el _merge_ con la rama `development`, ahora realizaremos un _merge_ de nuestra rama con la `development`, previamente descargando del repositorio remoto la operación _merge_ que nuestro compañero desarrollador realizó para juntar sus cambios.
+`git checkout development && git pull && git merge list-product`
+
+Nos produce conflictos de integración ya que hemos tocado el mismo fichero `src\CMain.java`, solucionamos los cambios de la misma forma que el último _merge_ con problemas y finalizamos el _merge_:
+`git add src\CMain.java && git commit`
+
+Subimos nuestros cambios de nuevo al repositorio remoto:
+`git push`
+
+> Extra: normalmente, en un equipo más grande de desarrolladores, y con un proyecto mayor, cuando se desea implementar una característica o conjunto de características por un equipo, dentro de un proyecto con varios equipos, se realiza una operación _fork_ que clona el estado del repositorio en un remoto diferente para cuando la característica se haya implementado (después de crear los _commit_ y ramas necesarias en este repositorio clonado), realizar una operación _pull request_ que solicite la integración de los cambios del repositorio clonado al repositorio original.
+> En un equipo pequeño, estas operaciones suponen un _overhead_ no deseado e innecesario ya que se conocen las ramas existentes y su objetivo por lo que no habrá conflictos con ellas a la hora de crear nuevas o avisar a los desarrolladores cuando se estén realizando operaciones del tipo _merge_ que impiden avanzar en una rama.
+
+### Tercera _release_ `ReleaseMJ3.0`
+Comprobamos en la rama `development` que la salida es igual a la salida esperada y finalmente, juntamos la rama `development` con la `master` mediante una operación _merge_ y anotamos la versión como una nueva _release_:
+`git checkout master && git merge development && git tag -s ReleaseMJ3.0 -m "List clients and products implemented"`
+
+Subimos la _tag_ de la nueva _release_ al repositorio remoto:
+`git push --tags`
+
+### Nuevo cliente: Papelería el Lápiz Afilado
+Llega un nuevo cliente y requiere de nuevos requisitos, entre los cuales destacan cambiar el nombre de Muebles José por el nombre de su establecimiento y alguna funcionalidad específica.
+
+Esto nos requiere cambiar el modelo de desarrollo y el objetivo de cada una de las ramas que habíamos creado hasta ahora.
+
+Requerimos ahora desarrollar _releases_ para clientes diferentes, por lo que para no mezclar estas, partiremos de la _master_ dos nuevas ramas, una para desarrollar características para cada cliente por separado.
+`git checkout master && git checkout -b lapiz-afilado`
+`git checkout master && git checkout -b muebles-jose`
+
+Cuando realicemos cambios para un cliente en específico los realizaremos sobre su rama o una subrama que parta de ésa y cuando necesitemos un cambio en ambos, modificaremos el núcleo de la aplicación, por lo tanto, afectando la rama `master`, que luego requerirá de un _rebase_ de `lapiz-afilado` y `muebles-jose` para que adquieran ambos los nuevos cambios.
+
+#### Cambios para el cliente Papelería el Lápiz Afilado
+Ahora nos situamos en la rama `lapiz-afilado` para desarrollar las necesidades del cliente.
+`git checkout lapiz-afilado`
+
+##### Cambiar el nombre en los listados
+Cambiamos el nombre que aparece en los _print_ para que coincidan con el nombre del nuevo establecimiento y realizamos un _commit_ con los cambios
+`git commit -a -m "MJ's name changed by LLA's name"`
+
+> En proyectos reales, esta configuración de usuario final como el nombre del establecimiento se guarda en un fichero de configuración personalizable cuyo contenido es un ítem de configuración como un fichero en formato `XML` o `JSON` de manera que se evita tener que crear una rama por cliente.
+> El crear una rama por cada cliente es una solución rápida al problema planteado para este proyecto trivial y no se recomienda en absoluto para proyectos más complejos en producción
+
+##### Añadir fecha de factura
+Implementamos los cambios y realizamos un _commit_ de nuevo con todos los ficheros modificados.
+`git commit -a -m "Added invoice calendar"`
+
+##### Permitir modificar fecha de factura
+Implementamos los cambios y realizamos un _commit_ de nuevo con todos los ficheros modificados.
+`git commit -a -m "Added invoice date modification"`
+
+##### Imprimir factura según el número de ésta
+Desarrollamos los cambios y realizamos un _commit_ con éstos
+`git commit -a -m "Added print invoice by number"`
+
+> Quizás alguna de éstas características, sobretodo la impresión de facturas según su número, podríamos haberla realizado sobre la rama `master` para que ambos clientes pudieran disfrutar de ella aunque sólo Lápiz Afilado la hubiera solicitado proveyendo de extras a los clientes existentes.
+
+##### Fix para corrección correcta
+Realizamos también un _commit_ para fijar un error en la salida que se adapte a la salida correcta a corregir
+`git commit -a -m "Fix, no descriptor in print header"`
+
+#### Primera _release_ para Papelería el Lápiz Afilado `ReleasePLA4.0`
+Anotamos el primer _release_ en la rama `lapiz-afilado` para su entrega al cliente:
+`git tag -s ReleasePLA4.0 -m "First release for LLA"`
+
+### Error facturas con número replicado
+El cliente nuevo detecta un error que permite la inserción y modificación de facturas con el mismo número. Es por ello que se debe arreglar en ambas version ya que el cliente Muebles José también se ve afectado.
+
+Por ello, debemos crear una rama que parta de la `master` para fijar el error, y luego, con el _merge_ sobre la `master` realizado de manera que ésta ya tenga los cambios con el error solucionado, hacer un _rebase_ de la rama de cada cliente para actualizar sus respectivas versiones.
+
+#### Fijación del error
+Aprovechamos la rama antes creada de `hotfix` que parte de la `master` para arreglar el error allí, eso sí, actualizándola con la última versión de la rama `master`
+`git checkout hotfix && git rebase master`
+
+A continuación, fijamos el error para que lance una excepción en el caso que se desee modificar o introducir una factura con número ya existente y realizamos un _commit_ con los cambios.
+`git commit -a -m "Fixed duplicated invoices identifier"`
+
+> Realizamos un _commit_ adicional para hacer coincidir el resultado de nuestra ejecución con el resultado esperado ya que hay un cambio inesperado en el resultado esperado no mencionado en el enunciado y sin sentido aparente ya que resta funcionalidad anteriormente implementada
+
+Finalmente, aplicamos una operación _merge_ sobre la `master` con la rama presente
+`git checokut master && git merge hotfix`
+
+#### Rebase de las versiones
+A continuación, vamos a la rama de cada uno de los clientes y hacemos un _rebase_ para actualizar ambas versiones de ambos clientes con el error fijado.
+`git checkout muebles-jose && git rebase master`
+`git checkout lapiz-afilado && git rebase master`
+
+> Hemos de resolver distintos errores de integración, sobretodo en el fichero `src\CMain.java`, de la misma forma que anteriores veces
+
+### Releases finales
+Finalmente, y con los _merge_ finalizados, comprobamos que las salidas sean correctas y lanzamos las etiquetas de las últimas _releases_:
+`git checkout muebles-jose && git tag -s ReleaseMJ3.1 -m "Fixed duplicated invoices identifier"`
+`git checkout lapiz-afilado && git tag -s ReleasePLA4.0 -m "Fixed duplicated invoices identifier"`
+
+Subimos al repositorio las nuevas etiquetas
+`git push --tags`
+
+> Comentarios adicionales: subimos manualmente las ramas al repositorio con el comando `git push -u bitbucket <rama>` para cada una de las ramas listadas en `git branch -l`
